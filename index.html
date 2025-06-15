@@ -168,7 +168,7 @@
     <img id="_anim_img9d2682436e5f42e9b93ec2b73e604cb7" alt="Bubble Animation Frame">
     <div class="anim-controls">
       <input id="_anim_slider9d2682436e5f42e9b93ec2b73e604cb7" type="range" class="anim-slider"
-             name="points" min="0" max="1" step="1" value="0"
+             name="points" min="0" max="2" step="1" value="0"
              oninput="anim9d2682436e5f42e9b93ec2b73e604cb7.set_frame(parseInt(this.value));">
       <div class="anim-buttons">
         <button title="Decrease speed" onclick="anim9d2682436e5f42e9b93ec2b73e604cb7.slower()"><i class="fa fa-minus"></i></button>
@@ -193,17 +193,21 @@
   </div>
 
   <script>
+    var anim9d2682436e5f42e9b93ec2b73e604cb7; // declare globally
+
     (function () {
       const img_id = "_anim_img9d2682436e5f42e9b93ec2b73e604cb7";
       const slider_id = "_anim_slider9d2682436e5f42e9b93ec2b73e604cb7";
       const loop_select_id = "_anim_loop_select9d2682436e5f42e9b93ec2b73e604cb7";
-      const frames = new Array(708);
-      for (let i = 0; i < 708; i++) {
-        frames[i] = "bubble_frames/frame" + ("0000000" + i).slice(-7) + ".png";
-      }
+
+      const frames = [
+        "bubble_frames/frame0000000.png",
+        "bubble_frames/frame0000001.png",
+        "bubble_frames/frame0000002.png"
+      ];
 
       setTimeout(function () {
-        anim9d2682436e5f42e9b93ec2b73e604cb7 = new Animation(frames, img_id, slider_id, 10, loop_select_id);
+        anim9d2682436e5f42e9b93ec2b73e604cb7 = new Animation(frames, img_id, slider_id, 200, loop_select_id);
       }, 0);
     })();
   </script>
