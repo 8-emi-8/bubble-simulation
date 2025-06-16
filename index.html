@@ -6,27 +6,27 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
   <style>
     .animation {
-        display: inline-block;
-        text-align: center;
+      display: inline-block;
+      text-align: center;
     }
     input[type=range].anim-slider {
-        width: 374px;
-        margin-left: auto;
-        margin-right: auto;
+      width: 374px;
+      margin-left: auto;
+      margin-right: auto;
     }
     .anim-buttons {
-        margin: 8px 0px;
+      margin: 8px 0px;
     }
     .anim-buttons button {
-        padding: 0;
-        width: 36px;
+      padding: 0;
+      width: 36px;
     }
     .anim-state label {
-        margin-right: 8px;
+      margin-right: 8px;
     }
     .anim-state input {
-        margin: 0;
-        vertical-align: middle;
+      margin: 0;
+      vertical-align: middle;
     }
   </style>
   <script>
@@ -93,14 +93,14 @@
 
     Animation.prototype.slower = function () {
       this.interval /= 0.7;
-      if (this.direction > 0) { this.play_animation(); }
-      else if (this.direction < 0) { this.reverse_animation(); }
+      if (this.direction > 0) this.play_animation();
+      else if (this.direction < 0) this.reverse_animation();
     };
 
     Animation.prototype.faster = function () {
       this.interval *= 0.7;
-      if (this.direction > 0) { this.play_animation(); }
-      else if (this.direction < 0) { this.reverse_animation(); }
+      if (this.direction > 0) this.play_animation();
+      else if (this.direction < 0) this.reverse_animation();
     };
 
     Animation.prototype.anim_step_forward = function () {
@@ -162,26 +162,25 @@
     };
   </script>
 </head>
-
 <body>
   <div class="animation">
-    <img id="_anim_img9d2682436e5f42e9b93ec2b73e604cb7" alt="Bubble Animation Frame">
+    <img id="_anim_img" alt="Bubble Animation Frame">
     <div class="anim-controls">
-      <input id="_anim_slider9d2682436e5f42e9b93ec2b73e604cb7" type="range" class="anim-slider"
+      <input id="_anim_slider" type="range" class="anim-slider"
              name="points" min="0" max="2" step="1" value="0"
-             oninput="anim9d2682436e5f42e9b93ec2b73e604cb7.set_frame(parseInt(this.value));">
+             oninput="anim.set_frame(parseInt(this.value));">
       <div class="anim-buttons">
-        <button title="Decrease speed" onclick="anim9d2682436e5f42e9b93ec2b73e604cb7.slower()"><i class="fa fa-minus"></i></button>
-        <button title="First frame" onclick="anim9d2682436e5f42e9b93ec2b73e604cb7.first_frame()"><i class="fa fa-fast-backward"></i></button>
-        <button title="Previous frame" onclick="anim9d2682436e5f42e9b93ec2b73e604cb7.previous_frame()"><i class="fa fa-step-backward"></i></button>
-        <button title="Play backwards" onclick="anim9d2682436e5f42e9b93ec2b73e604cb7.reverse_animation()"><i class="fa fa-play fa-flip-horizontal"></i></button>
-        <button title="Pause" onclick="anim9d2682436e5f42e9b93ec2b73e604cb7.pause_animation()"><i class="fa fa-pause"></i></button>
-        <button title="Play" onclick="anim9d2682436e5f42e9b93ec2b73e604cb7.play_animation()"><i class="fa fa-play"></i></button>
-        <button title="Next frame" onclick="anim9d2682436e5f42e9b93ec2b73e604cb7.next_frame()"><i class="fa fa-step-forward"></i></button>
-        <button title="Last frame" onclick="anim9d2682436e5f42e9b93ec2b73e604cb7.last_frame()"><i class="fa fa-fast-forward"></i></button>
-        <button title="Increase speed" onclick="anim9d2682436e5f42e9b93ec2b73e604cb7.faster()"><i class="fa fa-plus"></i></button>
+        <button title="Decrease speed" onclick="anim.slower()"><i class="fa fa-minus"></i></button>
+        <button title="First frame" onclick="anim.first_frame()"><i class="fa fa-fast-backward"></i></button>
+        <button title="Previous frame" onclick="anim.previous_frame()"><i class="fa fa-step-backward"></i></button>
+        <button title="Play backwards" onclick="anim.reverse_animation()"><i class="fa fa-play fa-flip-horizontal"></i></button>
+        <button title="Pause" onclick="anim.pause_animation()"><i class="fa fa-pause"></i></button>
+        <button title="Play" onclick="anim.play_animation()"><i class="fa fa-play"></i></button>
+        <button title="Next frame" onclick="anim.next_frame()"><i class="fa fa-step-forward"></i></button>
+        <button title="Last frame" onclick="anim.last_frame()"><i class="fa fa-fast-forward"></i></button>
+        <button title="Increase speed" onclick="anim.faster()"><i class="fa fa-plus"></i></button>
       </div>
-      <form title="Repetition mode" name="_anim_loop_select9d2682436e5f42e9b93ec2b73e604cb7" class="anim-state">
+      <form title="Repetition mode" name="_anim_loop_select" class="anim-state">
         <input type="radio" name="state" value="once" id="_anim_radio1" />
         <label for="_anim_radio1">Once</label>
         <input type="radio" name="state" value="loop" id="_anim_radio2" checked />
@@ -193,21 +192,23 @@
   </div>
 
   <script>
-    var anim9d2682436e5f42e9b93ec2b73e604cb7; // declare globally
+    var anim; // global
 
     (function () {
-      const img_id = "_anim_img9d2682436e5f42e9b93ec2b73e604cb7";
-      const slider_id = "_anim_slider9d2682436e5f42e9b93ec2b73e604cb7";
-      const loop_select_id = "_anim_loop_select9d2682436e5f42e9b93ec2b73e604cb7";
+      const img_id = "_anim_img";
+      const slider_id = "_anim_slider";
+      const loop_select_id = "_anim_loop_select";
+      const totalFrames = 200; // 🔁 Adjust this number if needed
+      const framePath = "bubble_frames/";
 
-      const frames = [
-        "bubble_frames/frame0000000.png",
-        "bubble_frames/frame0000001.png",
-        "bubble_frames/frame0000002.png"
-      ];
+      const frames = [];
+      for (let i = 0; i < totalFrames; i++) {
+        const frameNum = i.toString().padStart(7, '0');
+        frames.push(`${framePath}frame${frameNum}.png`);
+      }
 
       setTimeout(function () {
-        anim9d2682436e5f42e9b93ec2b73e604cb7 = new Animation(frames, img_id, slider_id, 200, loop_select_id);
+        anim = new Animation(frames, img_id, slider_id, 200, loop_select_id);
       }, 0);
     })();
   </script>
